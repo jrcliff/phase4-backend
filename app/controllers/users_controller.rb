@@ -38,6 +38,16 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  def user_post
+    users = []
+    User.all.each do |user|
+      posts = user.posts
+      current_user = {user: user, posts: posts}
+      users.push(current_user)
+    end
+    render json: users
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
