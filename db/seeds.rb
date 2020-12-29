@@ -7,6 +7,7 @@ erick = User.create(username: "Erick")
 justin = User.create(username: "Justin")
 rico = User.create(username: "Rico")
 vita = User.create(username: "Vita")
+justin.profile_pic.attach(io: File.open('app/testppic.jpg'), filename: 'testppic.png', content_type: 'image/jpg')
 
 Friendship.create(friend_id: erick.id, friender_id: justin.id, confirmed: true)
 Friendship.create(friend_id: justin.id, friender_id: rico.id, confirmed: true)
