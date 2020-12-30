@@ -3,11 +3,11 @@ Friendship.destroy_all()
 Post.destroy_all()
 Comment.destroy_all()
 
-erick = User.create(username: "Erick")
-justin = User.create(username: "Justin")
-rico = User.create(username: "Rico")
-vita = User.create(username: "Vita")
-justin.profile_pic.attach(io: File.open('app/testppic.jpg'), filename: 'testppic.png', content_type: 'image/jpg')
+erick = User.create(username: "Erick", current_games: ["Cold War", "Cyberpunk"], profile_pic:  "https://images-na.ssl-images-amazon.com/images/I/71PGvPXpk5L._SL1500_.jpg")
+justin = User.create(username: "Justin", current_games: ["Cyberpunk", "Spiderman"], profile_pic: "https://i.gadgets360cdn.com/large/ps5_digital_edition_1591912834512.jpeg")
+rico = User.create(username: "Rico", current_games: ["Overwatch"], profile_pic: "https://i5.walmartimages.com/asr/9d8137d4-9ee2-4e78-950c-b402b7df7501.a5a045a24f56bb860857b38c213a5006.jpeg")
+vita = User.create(username: "Vita", current_games: ["Animal Crossing", "Mario Kart"], profile_pic: "https://upload.wikimedia.org/wikipedia/commons/8/88/Nintendo-Switch-wJoyCons-BlRd-Standing-FL.jpg")
+
 
 Friendship.create(friend_id: erick.id, friender_id: justin.id, confirmed: true)
 Friendship.create(friend_id: justin.id, friender_id: rico.id, confirmed: true)
