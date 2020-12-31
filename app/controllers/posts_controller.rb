@@ -38,6 +38,16 @@ class PostsController < ApplicationController
     @post.destroy
   end
 
+  def post_comments
+    posts = []
+    Post.all.each do |post|
+      comments = post.comments
+      current_post = {post: post, comments: comments}
+      posts.push(current_post)
+    end
+    render json: posts
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
