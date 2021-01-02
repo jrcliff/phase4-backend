@@ -3,14 +3,15 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all
+    @posts = Post.all.includes(:user, :comments)
 
-    render json: @posts
+    render json: @posts, include: [:user, :comments => {:include => :user}]
   end
+
 
   # GET /posts/1
   def show
-    render json: @post
+    render json: @post, include: :user, include: :comments
   end
 
   # POST /posts
@@ -36,16 +37,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   def destroy
     @post.destroy
-  end
-
-  def post_comments
-    posts = []
-    Post.all.each do |post|
-      comments = post.comments
-      current_post = {post: post, comments: comments}
-      posts.push(current_post)
-    end
-    render json: posts
   end
 
   private

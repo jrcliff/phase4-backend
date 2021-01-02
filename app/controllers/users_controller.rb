@@ -5,12 +5,12 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users
+    render json: @users, include: :posts, include: :frienders
   end
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user, include: :posts, include: :frienders
   end
 
   # POST /users
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
-      render json: @user
+      render json: @user, include: :posts
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -38,15 +38,6 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
-  def user_post
-    users = []
-    User.all.each do |user|
-      posts = user.posts
-      current_user = {user: user, posts: posts}
-      users.push(current_user)
-    end
-    render json: users
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
