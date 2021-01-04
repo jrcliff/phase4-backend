@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :users
   get '/userposts', to: 'users#user_post'
   get '/postcomments', to: 'posts#post_comments'
+  post '/login', to: 'users#login'
 end
