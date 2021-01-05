@@ -40,8 +40,7 @@ class UsersController < ApplicationController
 
   def login
     @current_user = User.find_by(username: params[:username])
-    byebug
-    render json: @current_user
+    render json: @current_user, include: :frienders
   end
 
 
