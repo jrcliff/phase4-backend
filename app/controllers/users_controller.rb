@@ -40,11 +40,7 @@ class UsersController < ApplicationController
 
   def login
     @current_user = User.find_by(username: params[:username])
-<<<<<<< HEAD
-    render json: @current_user, include: :frienders
-=======
     render json: @current_user
->>>>>>> 93215d195e41f0b2f2a411096505b745d7888d30
   end
 
 
