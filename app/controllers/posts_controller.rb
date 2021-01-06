@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.all.includes(:user, :comments)
+    @posts = Post.all
 
     render json: @posts, include: [:user, :comments => {:include => :user}]
   end
@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
-    render json: @post, include: :user, include: :comments
+    render json: @post
   end
 
   # POST /posts
@@ -19,7 +19,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      render json: @post, status: :created, location: @post
+      render json: @post, status: :created, location: @post, include: :user
     else
       render json: @post.errors, status: :unprocessable_entity
     end
@@ -47,6 +47,6 @@ class PostsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def post_params
-      params.fetch(:post, {})
+      params.fetch(:post, {}).permit!
     end
 end
